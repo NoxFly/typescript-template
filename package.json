@@ -5,8 +5,10 @@
 	"main": "dist/server/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"live": "nodemon --watch src/server -e ts --exec \"ts-node-esm src/server/index.ts\"",
+		"build": "tsc -p .",
+		"start": "ts-node -r tsconfig-paths/register dist/server/index.js",
 		"dev": "ts-node-esm src/server/index.ts",
+		"live": "nodemon --watch src/server -e ts --exec \"ts-node-esm src/server/index.ts\"",
 		"lint": "eslint . --ext .js,.ts",
 		"lint-fix": "npm run lint -- --fix"
 	},

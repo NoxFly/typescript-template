@@ -15,7 +15,7 @@
         "skipDefaultLibCheck": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "outDir": "./dist",
+        "outDir": "./dist/server",
         "strictPropertyInitialization": false,
         "allowSyntheticDefaultImports": true,
         "allowUnreachableCode": false,
@@ -40,5 +40,11 @@
         "require": [
             "tsconfig-paths/register"
         ]
-    }
+    },
+    "include": [
+        "src/server"
+    ],
+    "exclude": [
+        "src/client"
+    ]
 }
