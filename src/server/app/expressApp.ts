@@ -22,7 +22,7 @@ export function createApp() {
 
 
     // client authorized paths
-    app.use('/public', express.static(process.env.CLIENTPATH?? ''));
+    app.use('/public', express.static(path.join(process.env.ROOTPATH?? '.', 'dist/client')));
 
 
     // define port to listen to
@@ -32,7 +32,7 @@ export function createApp() {
 
     // view engine setup
     app.set('view engine', 'ejs');
-    app.set('views', path.join(process.env.CLIENTPATH?? '', 'views'));
+    app.set('views', path.join(process.env.ROOTPATH?? '.', '/dist/client/views'));
 
     // router
     app.use(router);
