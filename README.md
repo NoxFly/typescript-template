@@ -13,3 +13,4 @@ npm run live
 
 * `~/` : `src/`
 * `~~/` : `/`
+* `~/shared/` : `src/shared/`

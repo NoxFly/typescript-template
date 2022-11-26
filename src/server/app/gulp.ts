@@ -7,6 +7,7 @@ import * as path from 'path';
 import * as scss from 'sass';
 import gsass from 'gulp-sass';
 import clip from 'gulp-clip-empty-files';
+import uglify from 'gulp-uglify';
 
 import { colors } from '~/server/utils';
 import minifyejs from './minify-ejs';
@@ -14,7 +15,17 @@ import minifyejs from './minify-ejs';
 
 const sass = gsass(scss);
 
-const tsProject = ts.createProject("tsconfig.json");
+const tsProject = ts.createProject("front.tsconfig.json");
+
+const uglifyJsOptions: uglify.Options = {
+    compress: {
+        module: true,
+        drop_console: false
+    },
+    output: {
+        comments: false
+    }
+};
 
 const paths: {
     dist: { [key: string]: string },
@@ -39,6 +50,7 @@ function compileJS(done: any): NodeJS.ReadWriteStream {
             ts_task_done = false;
             done();
         })
+        .pipe(uglify(uglifyJsOptions))
         .pipe(gulp.dest(`${paths.dist.js}/`))
         .on('end', (): void => {
             if(!ts_task_done) {
@@ -111,12 +123,12 @@ function build(done: any): void {
         console.info('Building client sources...');
     }
 
-    gulp.parallel(clean, compileViews, compileCSS, compileJS, copyAssets)();
+    gulp.parallel(clean, compileViews, compileCSS, compileJS, copyAssets)(done);
 
     done();
 }
 
-function copyAssets(done: any): void {
+function copyAssets(done: any): NodeJS.ReadWriteStream {
     return gulp.src(`${paths.dev.assets}/**/*`)
         .pipe(gulp.dest(`${paths.dist.assets}/`))
         .on('end', () => {

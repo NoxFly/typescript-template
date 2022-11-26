@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "baseUrl": "../",
+        "target": "ES6",
+        "lib": [
+            "ES2016"
+        ],
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "resolveJsonModule": true,
+        "allowUnreachableCode": false,
+        "noImplicitAny": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "removeComments": true,
+        "paths": {
+            "~/shared/*": [
+                "./src/shared/*"
+            ],
+            "~/*": [
+                "./src/*"
+            ],
+            "~~/*": [
+                "./*"
+            ]
+        },
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
+    },
+    "ts-node": {
+        "files": true,
+        "require": [
+            "tsconfig-paths/register"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/shared"
+    ]
+}
